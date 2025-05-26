@@ -8,6 +8,7 @@ class generator;
   mailbox #(transaction) gen2scb;
 
   event scbnxt;
+  event gen_ended;
 
   function new(mailbox #(transaction) gen2drv, mailbox #(transaction) gen2scb);
     this.gen2drv=gen2drv;
@@ -24,7 +25,7 @@ class generator;
       trans.display("GEN");
       @(scbnxt);
     end
-    ->gen-ended;
+    ->gen_ended;
   endtask
 endclass
                                             
