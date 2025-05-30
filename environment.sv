@@ -1,6 +1,7 @@
 //Environment Class
 `include "transaction.sv"
 `include "generator.sv"
+`include "driver.sv"
 `include "monitor.sv"
 `include "scoreboard.sv"
 
@@ -16,6 +17,8 @@ class environment;
 
   event scbnxt;
 
+  virtual dff_if vif;
+
   function new(virtual dff_if vif);
     gen2drv=new();
     gen2scb=new();
@@ -30,8 +33,8 @@ class environment;
     scb.scbnxt=scbnxt;
 
     this.vif=vif;
-    drv.vif=vif;
-    mon.vif=vif;
+    drv.vif=this.vif;
+    mon.vif=this.vif;
   endfunction
 
   task pre_test();
